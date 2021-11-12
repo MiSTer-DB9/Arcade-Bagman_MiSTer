@@ -217,7 +217,7 @@ localparam CONF_STR = {
 	"H0OJK,Aspect ratio,Original,Full Screen,[ARC1],[ARC2];",
 	"H1H0O2,Orientation,Vert,Horz;",
 	"O35,Scandoubler Fx,None,HQ2x,CRT 25%,CRT 50%,CRT 75%;",
-	"OR,Autosave Hiscores,Off,On;",
+	"h2OR,Autosave Hiscores,Off,On;",
 	"-;",
 	"OUV,UserIO Joystick,Off,DB9MD,DB15 ;",
 	"OT,UserIO Players, 1 Player,2 Players;",
@@ -320,7 +320,7 @@ hps_io #(.CONF_STR(CONF_STR)) hps_io
 
 	.buttons(buttons),
 	.status(status),
-	.status_menumask({mod_squa,direct_video}),
+	.status_menumask({hs_configured,mod_squa,direct_video}),
 	.forced_scandoubler(forced_scandoubler),
 	.gamma_bus(gamma_bus),
 	.direct_video(direct_video),
@@ -450,6 +450,7 @@ wire hs_write_enable;
 wire hs_write_intent;
 wire hs_read_intent;
 wire hs_pause;
+wire hs_configured;
 
 hiscore #(
 	.HS_ADDRESSWIDTH(16),
@@ -471,7 +472,8 @@ hiscore #(
 	.ram_write(hs_write_enable),
 	.ram_intent_read(hs_read_intent),
 	.ram_intent_write(hs_write_intent),
-	.pause_cpu(hs_pause)
+	.pause_cpu(hs_pause),
+	.configured(hs_configured)
 );
 
 bagman bagman
